@@ -1,10 +1,12 @@
-package server
+package quotation
 
-type CambioResponse struct {
-	USDBRL Moeda `json:"USDBRL"`
+import "challeng-client-server-api/server/entities"
+
+type QuotationResponse struct {
+	USDBRL Coin `json:"USDBRL"`
 }
 
-type Moeda struct {
+type Coin struct {
 	Code       string `json:"code"`
 	Codein     string `json:"codein"`
 	Name       string `json:"name"`
@@ -16,4 +18,10 @@ type Moeda struct {
 	Ask        string `json:"ask"`
 	Timestamp  string `json:"timestamp"`
 	CreateDate string `json:"create_date"`
+}
+
+func (q QuotationResponse) ToEntity() *entities.Quotation {
+	return &entities.Quotation{
+		Bid: q.USDBRL.Bid,
+	}
 }
