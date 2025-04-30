@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"challeng-client-server-api/server/usecase"
+	"challeng-client-server-api/internal/usecase"
 	"encoding/json"
 	"net/http"
 )

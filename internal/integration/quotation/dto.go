@@ -1,6 +1,6 @@
 package quotation
 
-import "challeng-client-server-api/server/entities"
+import "challeng-client-server-api/internal/entities"
 
 type QuotationResponse struct {
 	USDBRL Coin `json:"USDBRL"`
@@ -23,5 +23,7 @@ type Coin struct {
 func (q QuotationResponse) ToEntity() *entities.Quotation {
 	return &entities.Quotation{
 		Bid: q.USDBRL.Bid,
+		Code: q.USDBRL.Code,
+		Codein: q.USDBRL.Codein,
 	}
 }

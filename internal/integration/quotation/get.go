@@ -1,7 +1,7 @@
 package quotation
 
 import (
-	"challeng-client-server-api/server/entities"
+	"challeng-client-server-api/internal/entities"
 	"encoding/json"
 	"io"
 )

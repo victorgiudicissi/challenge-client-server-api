@@ -3,7 +3,7 @@ package quotation
 import (
 	"net/http"
 
-	"challeng-client-server-api/server/usecase"
+	"challeng-client-server-api/internal/usecase"
 )
 
 type quotationIntegration struct {

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"challeng-client-server-api/server/dependencies"
-	quotationintegration "challeng-client-server-api/server/integration/quotation"
-	quotationrepository "challeng-client-server-api/server/repository/quotation"
-	"challeng-client-server-api/server/handler"
-	"challeng-client-server-api/server/usecase"
+	"challeng-client-server-api/internal/dependencies"
+	quotationintegration "challeng-client-server-api/internal/integration/quotation"
+	quotationrepository "challeng-client-server-api/internal/repository/quotation"
+	"challeng-client-server-api/internal/handler"
+	"challeng-client-server-api/internal/usecase"
 	"log"
 	"net/http"
 	"time"

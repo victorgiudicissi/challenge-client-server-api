@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"challeng-client-server-api/server/entities"
+	"challeng-client-server-api/internal/entities"
 )
 
 type (
