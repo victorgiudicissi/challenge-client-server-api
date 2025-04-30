@@ -6,17 +6,17 @@ import (
 	"net/http"
 )
 
-type quotationHandler struct {
-	uc usecase.FetchQuotationUseCase
+type fetchAndSaveQuotationHandler struct {
+	uc usecase.FetchAndSaveQuotationUseCase
 }
 
-func NewQuotationHandler(uc usecase.FetchQuotationUseCase) *quotationHandler {
-	return &quotationHandler{
+func NewFetchAndSaveQuotationHandler(uc usecase.FetchAndSaveQuotationUseCase) *fetchAndSaveQuotationHandler {
+	return &fetchAndSaveQuotationHandler{
 		uc: uc,
 	}
 }
 
-func (q *quotationHandler) Handle(w http.ResponseWriter, r *http.Request) {
+func (q *fetchAndSaveQuotationHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	result, err := q.uc.Do()
 
 	if err != nil {

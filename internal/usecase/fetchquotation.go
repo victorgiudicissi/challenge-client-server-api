@@ -1,9 +1,7 @@
 package usecase
 
-import "challeng-client-server-api/internal/entities"
-
 type FetchQuotationUseCase interface {
-	Do() (*entities.Quotation, error)
+	Do() error
 }
 
 type fetchQuotationUseCase struct {
@@ -18,16 +16,16 @@ func NewFetchQuotationUseCase(repository QuotationRepository, integration Quotat
 	}
 }
 
-func (uc *fetchQuotationUseCase) Do() (*entities.Quotation, error) {
-	integrationResponse, err := uc.integration.GetQuotation()
+func (uc *fetchQuotationUseCase) Do() error {
+	integrationResponse, err := uc.integration.FetchQuotation()
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	err = uc.repository.SaveQuotation(integrationResponse)
 	if err != nil {
-		return nil, err
+		return err
 	}
-
-	return integrationResponse, nil
+	
+	return nil
 }

@@ -1,16 +1,13 @@
-package quotation
+package file
 
 import (
 	"challeng-client-server-api/internal/usecase"
-	"database/sql"
 )
 
 type quotationRepository struct {
-	db *sql.DB
 }
 
-func NewQuotationRepository(db *sql.DB) usecase.QuotationRepository {
+func NewQuotationRepository() usecase.QuotationRepository {
 	return &quotationRepository{
-		db: db,
 	}
 }

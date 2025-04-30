@@ -2,9 +2,9 @@ package main
 
 import (
 	"challeng-client-server-api/internal/dependencies"
-	quotationintegration "challeng-client-server-api/internal/integration/quotation"
-	quotationrepository "challeng-client-server-api/internal/repository/quotation"
 	"challeng-client-server-api/internal/handler"
+	economiaintegration "challeng-client-server-api/internal/integration/economia"
+	quotationsqliterepository "challeng-client-server-api/internal/repository/sqlite"
 	"challeng-client-server-api/internal/usecase"
 	"log"
 	"net/http"
@@ -14,27 +14,27 @@ import (
 )
 
 func main() {
-	dep := dependencies.Init()
+	dep := dependencies.InitServer()
 
-	defer dep.Destroy()
+	defer dep.Close()
 
-	quotationIntegration := quotationintegration.NewQuotationIntegration(dep.HttpClient)
-	quotationRepository := quotationrepository.NewQuotationRepository(dep.DB)
+	quotationIntegration := economiaintegration.NewEconomiaIntegration(dep.HttpClient)
+	quotationRepository := quotationsqliterepository.NewQuotationRepository(dep.DB)
 
-	fetchQuotationUseCase := usecase.NewFetchQuotationUseCase(quotationRepository, quotationIntegration)
+	fetchQuotationUseCase := usecase.NewFetchAndSaveQuotationUseCase(quotationRepository, quotationIntegration)
 
-	fetchQuotationHandler := handler.NewQuotationHandler(fetchQuotationUseCase)
+	fetchQuotationHandler := handler.NewFetchAndSaveQuotationHandler(fetchQuotationUseCase)
 
 	r := mux.NewRouter()
-	
-	r.HandleFunc("/cotacao", fetchQuotationHandler.Handle)
+
+	r.HandleFunc("/cotacao", fetchQuotationHandler.Handle).Methods(http.MethodGet)
 
 	srv := &http.Server{
-        Handler:      r,
-        Addr:         "127.0.0.1:8080",
-        WriteTimeout: 15 * time.Second,
-        ReadTimeout:  15 * time.Second,
-    }
+		Handler:      r,
+		Addr:         "127.0.0.1:8080",
+		WriteTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
+	}
 
 	log.Println("Server started on port 8080")
 

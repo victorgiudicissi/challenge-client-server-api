@@ -10,6 +10,10 @@ type (
 	}
 
 	QuotationIntegration interface {
-		GetQuotation() (*entities.Quotation, error)
+		FetchQuotation() (*entities.Quotation, error)
+	}
+
+	EconomiaIntegration interface {
+		FetchQuotation() (*entities.Quotation, error)
 	}
 )
