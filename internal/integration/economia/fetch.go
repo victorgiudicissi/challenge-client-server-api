@@ -15,17 +15,17 @@ const (
 
 func (i *economiaIntegration) FetchQuotation() (*entities.Quotation, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
-    defer cancel()
-	
+	defer cancel()
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, APIURL, nil)
-    if err != nil {
-        return nil, err
+	if err != nil {
+		return nil, err
 	}
 
 	resp, err := i.client.Do(req)
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
 	defer resp.Body.Close()
 

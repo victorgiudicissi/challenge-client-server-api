@@ -15,19 +15,19 @@ const (
 )
 
 func (i *quotationIntegration) FetchQuotation() (*entities.Quotation, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
-    defer cancel()
-	
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	defer cancel()
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, APIURL, nil)
-    if err != nil {
+	if err != nil {
 		log.Println(err)
-        return nil, err
+		return nil, err
 	}
 
 	resp, err := i.client.Do(req)
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
 	defer resp.Body.Close()
 
